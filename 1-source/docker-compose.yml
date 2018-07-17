@@ -1,0 +1,69 @@
+version: '2'
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    environment:
+      - "DB_PORT=5432"
+      - "DB_HOST=database"
+    container_name: first_app
+    restart: always
+      
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - app
+    ports:
+      - 8081:80
+    container_name: first_name
+    restart: always
+    
+    
+  database:
+    image: postgres:9.4
+    restart: always
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_PASSWORD=1q2w3e"
+    ports:
+        - "5431:5431"
+    container_name: first_database
+    
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    volumes:
+      - pgadmin4:/home/pgadmin/.pgadmin
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=admin"
+      - "PGADMIN_DEFAULT_PASSWORD=admin"
+    ports:
+        - "8056:80"
+    container_name: first_pgadmin
+    
+#docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer    
+    
+  manager:
+    image: portainer/portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+        - "9000:9000"
+    container_name: first_manager 
+    restart: always   
+    
+    
+volumes:
+  dbdata:
+  pgadmin4:
+  portainer_data:
