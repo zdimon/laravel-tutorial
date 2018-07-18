@@ -18,7 +18,7 @@
     
 Отметить тут и перегрузить машину.
 
-    ![GitHub Logo](/images/1/clipboard.png)
+![](/images/1/clipboard.png)
 
 ** Соединение ssh клиентом напрямую к виртуалке **
 
