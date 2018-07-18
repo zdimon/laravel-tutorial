@@ -30,6 +30,13 @@
 
     ![GitHub Logo](/images/1/1.png)
   
+3. Узнаем ip адресс машины.
+
+    ![GitHub Logo](/images/1/2.png)      
+  
+4. Соединяемся.
+
+    ssh username@ip-address  
 
 ### PHP 7.1
 
