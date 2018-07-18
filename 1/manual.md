@@ -55,18 +55,21 @@
 
 - перейдем в пользователя postgres  
 
-
+```
     sudo -s -u postgres
+```
 
 - запустим клиент   
 
-
+```
     psql
+```
 
 - меняем пароль 
 
-
+```
     \password postgres
+```
     
 - выходим в текущего пользователя (два раза ctrl+d)  
 
@@ -78,92 +81,124 @@
 
 - отредактируем файл настроек 
 
+```
     sudo nano /etc/postgresql/10/main/pg_hba.conf
+```
 
 - добавим в конец
 
+```
     host all all 0.0.0.0/0 trust
+```
 
 - отредактируем файл настроек 
 
+```
     nano /etc/postgresql/10/main/postgresql.conf
+```
     
 - добавим в конец
 
+```
     listen_addresses = '*'
-
+```
 
 ## PHP 7.1
 
+```
     sudo add-apt-repository ppa:ondrej/php
     sudo apt-get update
     sudo apt-get install php7.1
+```
     
 ## Установка зависимостей Laravel.
 
+```
     sudo apt-get install php7.2-mbstring php7.2-dom php7.2-pgsql php7.2-fpm php7.2-zip
-
+```
 
 ## Установка PHP composer.
 
 - качаем установщик
 
+```
     curl -sS https://getcomposer.org/installer
-  
+```  
 
 - устанавливаем композер глобально.
 
+```
     sudo php installer --install-dir=/usr/local/bin --filename=composer
+```
     
-Проще.
+Можно установить проще.
 
+```
     sudo apt-get install composer
+```
     
 ## Создаем папку для проектов.
 
+```
     mkdir prj
     cd prj
-
+```
 
 ## Тянем Laravel. 
 
+```
     composer require "laravel/installer"
+```
 
 ## Создаем новый проект.
 
+```
     ./vendor/bin/laravel new blog-project
     cd blog-project
+```
   
 - проверим дев сервер.
 
+```
     php artisan serve
+```
+ 
+Должны видеть это на 8000 порту.
 
+![](image/1/4.png)    
+    
     
 ## Делаем копию .env.example
 
+```
     cp .env.example .env
-    
+```    
     
 - изменяем коннект
 
+```
     DB_CONNECTION=pgsql
     DB_HOST=127.0.0.1
     DB_PORT=5432
     DB_DATABASE=blog
     DB_USERNAME=postgres
     DB_PASSWORD=password
+```
 
 **создаем базу данных**
 
+```
     su postgres
     createdb blog
+```
     
 - разлогиниваемся из пользователя postgres по ctrl+d
         
 ## Запускаем миграцию
 
+```
     php artisan migrate
-    
+```    
     
 ## Настройка PHP-FPM + Nginx
     
