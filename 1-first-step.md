@@ -1,10 +1,12 @@
 # Начало работы.
 
+Необходимо иметь ОС на базе Ubuntu установленной базово либо внутри виртуальной машины VirtualBox.
+
 ## Ручная установка необходимых инструментов.
 
 ### Вспомогательные.
 
-    sudo apt-get install git terminator curl git unzip 
+    sudo apt-get install git terminator curl git unzip gedit chrome
     
 ### База.
 
@@ -14,8 +16,20 @@
 
     sudo apt-get install virtualbox-guest-dkms virtualbox-guest-x11
     
+Отметить тут и перегрузить машину.
+
+    ![GitHub Logo](/images/1/clipboard.png)
+
+** Соединение ssh клиентом напрямую к виртуалке **
+
+1. Установим ssh сервер.
+
+    sudo apt-get install openssh-server
     
-![GitHub Logo](/images/1/clipboard.png)
+2. Добавим мост.
+
+    ![GitHub Logo](/images/1/1.png)
+  
 
 ### PHP 7.1
 
