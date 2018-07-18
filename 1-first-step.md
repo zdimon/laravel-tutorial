@@ -13,6 +13,9 @@
 - при работе внутри виртуалки нужны либы для клипборда на Ubuntu
 
     sudo apt-get install virtualbox-guest-dkms virtualbox-guest-x11
+    
+    
+![GitHub Logo](/images/1/clipboard.png)
 
 ### PHP 7.1
 
