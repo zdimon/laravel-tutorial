@@ -53,13 +53,16 @@
 
 - перейдем в пользователя postgres
 
+
     sudo -s -u postgres
 
 - запустим клиент
 
+
     psql
 
 - меняем пароль
+
 
     \password postgres
     
