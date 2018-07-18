@@ -10,7 +10,7 @@
     
 Отметить тут и перегрузить машину.
 
-![](/images/1/clipboard.png)
+![](images/clipboard.png)
 
 **Соединение ssh клиентом напрямую к виртуалке**
 
@@ -24,13 +24,13 @@
     
 2. Добавим мост.
 
-    ![GitHub Logo](/images/1/1.png)
+    ![GitHub Logo](images/1.png)
   
 3. Узнаем ip адресс машины.
 
     ip arrd show
 
-    ![GitHub Logo](/images/1/2.png)      
+    ![GitHub Logo](images/2.png)      
   
 4. Соединяемся.
 
@@ -67,7 +67,7 @@
 
 Соединяемся.
 
-[](/images/1/3.png)  
+[](images/3.png)  
 
 ***Внешний доступ к базе из гипервизора***
 
