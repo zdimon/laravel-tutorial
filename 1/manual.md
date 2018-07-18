@@ -200,6 +200,8 @@
     php artisan migrate
 ```    
     
+![](images/5.png)     
+    
 ## Настройка PHP-FPM + Nginx
     
 ## PHP-fpm configuration file.    
