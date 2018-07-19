@@ -6,6 +6,10 @@ Docker позволяет «упаковать» приложение со вс�
 
 Требования: Linux (нативный либо в виртуалке).
 
+При использовании Linux в качестве основной ОС смысла разворачивать Докер контейнеры внутри виртуалки (гостевой ОС) смысла нет, т.к. это лишний уровень абстракции.
+Поэтому проще поднять контейнеры прямо внутри рабощей ОС.
+При использовании же Windows другого способа как развернуть контейнеры внутри VirtualBox нет.
+
 ## Установка Docker.
 
     curl https://get.docker.com > /tmp/install.sh
@@ -36,18 +40,94 @@ Docker позволяет «упаковать» приложение со вс�
 
 Качаем бинарь.
 
+```
   sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
   
+```  
   
 Делаем его исполняемым.
 
+```
   sudo chmod +x /usr/local/bin/docker-compose
+```
   
 Проверяем все ли пучком.
 
+```
   docker-compose --version
+```  
   
-Если да, переходим в папку проекта и поднимаем контейнеры.
+## Создаем папку для проектов.
+
+```
+    mkdir prj
+    cd prj
+```
+
+## Тянем Laravel. 
+
+```
+    composer require "laravel/installer"
+```
+
+## Создаем новый проект.
+
+```
+    ./vendor/bin/laravel new blog-project
+    cd blog-project
+```
+
+  
+## Создадим docer-compose.yml файл с двумя контейнерами app и database 
+
+```
+    version: '2'
+    services:
+
+      app:
+        build:
+          context: ./
+          dockerfile: app.dockerfile
+        working_dir: /var/www
+        volumes:
+          - ./:/var/www
+        environment:
+          - "DB_PORT=5432"
+          - "DB_HOST=database"
+        container_name: dev_app
+        restart: always
+        
+        
+      database:
+        image: postgres:9.4
+        restart: always
+        volumes:
+          - dbdata:/var/lib/postgresql/data
+        environment:
+          - "POSTGRES_PASSWORD=password"
+        ports:
+            - "5431:5431"
+        container_name: dev_database
+```     
+     
+        
+## Создадим файл app.dockerfile в корне проекта.
+
+```
+    FROM php:7.1-fpm
+
+    RUN apt-get update && apt-get install -y libmcrypt-dev \
+        libpq-dev \
+        libmagickwand-dev --no-install-recommends \
+        && pecl install imagick \
+        && docker-php-ext-enable imagick \
+        && docker-php-ext-install mcrypt \
+        && docker-php-ext-install pgsql pdo pdo_pgsql
+        
+    RUN chown -R www-data:www-data /var/www
+```      
+  
+Поднимаем контейнеры.
 
   sudo docker-compose up    
     
